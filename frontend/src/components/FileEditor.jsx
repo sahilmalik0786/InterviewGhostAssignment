@@ -1,6 +1,7 @@
 import React, {  useContext, useState } from 'react';
 import AIEnhanceBtn from './AiEnhanceBtn';
 import { pdfContext } from '../context/PdfContext';
+import { Removebtn } from './Removebtn';
 // import AIEnhanceButton from './AIEnhanceButton';
 
 
@@ -47,17 +48,17 @@ const FileEditor = ({
 
   const renderInputs = () => {
     if (section === 'skills') {
-      return <div className='flex flex-col gap-5'>      
+      return <div className='flex flex-col'>      
        {data.map((skill, index) => (
-        <div key={index} className="skill-item px-2  flex w-fit py-1 bg-pink-400 rounded-md">
+        <div key={index} className="skill-item px-2  flex w-fit py-2 bg-pink-400 rounded-md shadow-lg/15  mb-2">
           <input
             type="text"
             value={skill}
-            onChange={(e) => handleInputChange(e, null, index)}
+            onChange={(e) => handleInputChange(e, null, index)
+            }
+            
           />
-          <button type="button" onClick={() => onRemoveEntry(index)} className='bg-pink-500 rounded-md'>
-            Remove
-          </button>
+          <Removebtn index={index} />
         </div>
 
       ))}
@@ -72,7 +73,7 @@ const FileEditor = ({
             value={data}
             onChange={(e) => handleSectionChange( section ,e.target.value)}
             rows={5}
-            className='outline-0 bg-pink-400 p-1 rounded-md shadow'
+            className='outline-0 bg-pink-400 px-2 py-1 rounded-md shadow-lg/15'
           />
           <AIEnhanceBtn
             content={data} 
@@ -88,14 +89,14 @@ const FileEditor = ({
        
         {Object.keys(entry).map((field) => (
           field !== 'id' && (
-            <div key={field}>
+            <div key={field} className='flex gap-10 items-center  w-96 justify-between'>
               <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
          
               <input
                 type="text"
                 value={entry[field]}
                 onChange={(e) => handleInputChange(e, field, index)}
-                className='outline-0 bg-pink-400 rounded-md p-1'
+                className='outline-0 bg-pink-400 rounded-md p-1 shadow-lg/10'
               />
             </div>
           )
@@ -109,20 +110,18 @@ const FileEditor = ({
               onchange(newData);
             }} 
           /> 
-          <button type="button" onClick={() => onRemoveEntry(index)}>
-            Remove 
-          </button>
+         <Removebtn index={index} />
         </div>
       </div>
     ));
   };
 
   return (
-    <div className="section-editor">
-      <h3>{section.charAt(0).toUpperCase() + section.slice(1)}</h3>
+    <div className="section-editor space-y-2">
+      <h3 className='md:text-xl font-semibold '>{section.charAt(0).toUpperCase() + section.slice(1)}</h3>
       {renderInputs()}
       {(section === 'experience' || section === 'education' || section === 'skills') && (
-        <button type="button" onClick={onAddEntry}>
+        <button type="button" onClick={onAddEntry} className='bg-purple-500 rounded-md px-2 py-1 hover:shadow-lg/15 shadow-lg/10 cursor-pointer '>
           Add Entry
         </button>
       )}

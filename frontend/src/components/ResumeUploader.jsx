@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { pdfContext } from "../context/PdfContext";
+import  {  useState } from "react";
+
 
 const ResumeUploader = ({onupload}) => {
  
@@ -15,21 +15,21 @@ const ResumeUploader = ({onupload}) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const dummyResume = {
-        personal: { name: "sahil", email: "", phone: "" },
-        summary: "Experienced developer...",
-        experience: [{ id: 1, company: "hello", role: "", duration: "" }],
-        education: [{ id: 1, institution: "", degree: "", year: "" }],
-        skills: ["JavaScript", "React"],
+        personal: { name: "John doe", email: "john@doe.com", phone: "+1 333-233-112" },
+        summary: "Experienced Frontend Developer with 3+ years of experience building scalable web applications...",
+        experience: [{ id: 1, company: "TechCorp", role: "Frontend Developer", duration: "2 years" }],
+        education: [{ id: 1, institution: "Stanford University", degree: "Computer Science", year: "2025" }],
+        skills: ['JavaScript', 'React', 'Node.js', 'Python', 'HTML5',],
       };
-     onupload(dummyResume)
-     console.log('jh')
+     onupload(dummyResume , true)
+    //  console.log('jh')
     };
     reader.readAsArrayBuffer(res)
   
   
   };
   return (
-    <div className="bg-pink-300 p-2 w-full md:w-1/2 h-full flex ">
+    <div className="bg-pink-300 p-2 w-full md:w-1/2  h-full flex ">
       <div className="w-10/12 mt-5 mx-auto h-80 bg-purple-400 rounded p-2 flex flex-col shadow-lg/10">
         <h1 className="text-3xl capitalize font-bold">upload your resume</h1>
         <span className="h-full bg-pink-400 flex items-center justify-center relative flex-col rounded-lg mt-4 ">
