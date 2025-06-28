@@ -3,11 +3,11 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
-import os
+
 
 app = FastAPI()
 
-# CORS configuration
+# CORS config
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -39,19 +39,7 @@ async def save_resume(resume: dict):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/get-resume")
-async def get_resume():
-    try:
-      
-        if os.path.exists("resume_data.json"):
-            with open("resume_data.json", "r") as f:
-                return json.load(f)
-        return resume_data
-    except Exception as e:
-        raise HTTPException(status_code=404, detail="Resume not found")
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
     
     
